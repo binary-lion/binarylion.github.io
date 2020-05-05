@@ -5,3 +5,8 @@
     /*height: 300px;
     width: 300px;*/
 }
+
+.content {
+    max-width: 500px;
+    margin: auto;
+  }
