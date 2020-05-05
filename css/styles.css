@@ -1,8 +1,7 @@
 .verticalhorizontal {
     display: table-cell;
-    height: 300px;
     text-align: center;
-    width: 300px;
     vertical-align: middle;
+    /*height: 300px;
+    width: 300px;*/
 }
-
