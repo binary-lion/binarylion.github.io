@@ -8,20 +8,7 @@
   <meta name="description" content="Binary Lion is a european devop group composed of hackerspace members that work together on charitable projects.">
 
   <link rel="stylesheet" href="css/styles.css">
-  <script src="http://www.openlayers.org/api/OpenLayers.js"></script>
-  <script>
-    function init() {
-      map = new OpenLayers.Map("basicMap");
-      var mapnik = new OpenLayers.Layer.OSM();
-      map.addLayer(mapnik);
-      map.setCenter(new OpenLayers.LonLat(13.41,52.52) // Center of the map
-        .transform(
-          new OpenLayers.Projection("EPSG:4326"), // transform from WGS 1984
-          new OpenLayers.Projection("EPSG:900913") // to Spherical Mercator Projection
-        ), 15 // Zoom level
-      );
-    }
-  </script>
+  <script src="https://cdn.apple-mapkit.com/mk/5.x.x/mapkit.js"></script>
 </head>
 
 <body>
@@ -35,7 +22,27 @@
     <br><br>
     We usually pick projects by ourself, but feel free to use the email address hello@binarylion.org for first contact.
 
-    <div id="basicMap"></div>
+    <div id="map"></div>
+        
+        <script>
+        mapkit.init({
+            authorizationCallback: function(done) {
+                var xhr = new XMLHttpRequest();
+                xhr.open("GET", "/services/jwt");
+                xhr.addEventListener("load", function() {
+                    done(this.responseText);
+                });
+                xhr.send();
+            }
+        });
+        
+        var Cupertino = new mapkit.CoordinateRegion(
+            new mapkit.Coordinate(37.3316850890998, -122.030067374026),
+            new mapkit.CoordinateSpan(0.167647972, 0.354985255)
+        );
+        var map = new mapkit.Map("map");
+        map.region = Cupertino;
+        </script>
     
     <br><br>
 
